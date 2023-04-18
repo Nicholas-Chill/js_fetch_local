@@ -13,8 +13,26 @@ function readFilePromise() {
         generateHTML(customers);
     })
     .catch(error => {
-        console.log('Error: ' + error);
+        console.log(error);
     });
+}
+
+// Async function
+async function readFileAsync() {
+    let data = await fetch('customers.json');
+    let customers = await data.json();
+    generateHTML(customers);
+}
+
+// Async function with error handling
+async function readFileAsync2() {
+    try {
+        let data = await fetch('customers.json');
+        let customers = await data.json();
+        generateHTML(customers);
+    } catch {
+        console.log('Error, could not read from json file');
+    }
 }
 
 function generateHTML(customers) {
@@ -32,3 +50,5 @@ function generateHTML(customers) {
 }
 
 readFilePromise();
+readFileAsync();
+readFileAsync2();
